@@ -3,31 +3,27 @@ angular.module('all').factory('MflService',
         function (MflRest, LeagueInfo) {
             'use strict';
 
-            function getStandings() {
-                return MflRest.get().one('').get({
-                    L: LeagueInfo.id(),
-                    JSON: 1,
-                    TYPE: 'leagueStandings'
-                }).then(function(data) {
-                    return data && data.leagueStandings && data.leagueStandings.franchise;
-                });
+
+            var leagueApis = {
+                leagueStandings: function(data) {
+                    return data.franchise;
+                },
+                league: _.identity
             }
 
-            function getLeague() {
-                return MflRest.get().one('').get({
-                    L: LeagueInfo.id(),
-                    JSON: 1,
-                    TYPE: 'league'
-                }).then(function(data) {
-                    return data && data.league;
-                });;
-            }
+            var service = _.mapValues(leagueApis, function(callback, api) {
+                return function() {
+                    return MflRest.get().one('').get({
+                        L: LeagueInfo.id(),
+                        JSON: 1,
+                        TYPE: api
+                    }).then(function(data) {
+                        return callback(data[api]);
+                    });
+                };
+            });
 
-
-            return {
-                getStandings: getStandings,
-                getLeague: getLeague
-            };
+            return service;
         }
     ]
 );

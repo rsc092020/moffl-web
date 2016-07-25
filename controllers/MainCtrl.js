@@ -8,8 +8,8 @@ angular.module('all').controller('MainCtrl',
             $scope.refresh = refresh;
 
             function refresh() {
-                var standingsPromise = MflService.getStandings();
-                var leaguePromise = MflService.getLeague();
+                var standingsPromise = MflService.leagueStandings();
+                var leaguePromise = MflService.league();
 
                 $q.all([standingsPromise, leaguePromise]).then(function(data) {
                     $scope.league = data[1];
