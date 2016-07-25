@@ -1,12 +1,17 @@
 <div class="container-fluid">
-    <h3>League Id: <input type="number" ng-model="leagueInfo.id" ng-model-options="{getterSetter: true}"></h3>
-    <h3>Year: <input type="number" ng-model="leagueInfo.year" ng-model-options="{getterSetter: true}"></h3>
+    <h3>
+        League Id: <input class="form-control" type="number" ng-model="leagueInfo.id" ng-model-options="{getterSetter: true}">
+    </h3>
+    <h3>
+        Year: <input class="form-control" type="number" ng-model="leagueInfo.year" ng-model-options="{getterSetter: true}">
+    </h3>
     <button type="button" class="btn btn-primary" ng-click="refresh()">Refresh</button>
 
     <br>
     <br>
     <h3 ng-show="league">
-        {{league.name}} ({{league.id}})<br>{{league.year}}
+        {{league.name}} ({{league.id}})<br>
+        <select ng-options="item.year for item in history" ng-model="historyItem" ng-change="changeLeagueYear()"></select>
     </h3>
     <table class="table table-striped" ng-show="standings">
         <thead>
