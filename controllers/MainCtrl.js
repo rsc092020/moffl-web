@@ -6,6 +6,7 @@ angular.module('all').controller('MainCtrl',
             var validLeagueUrl = /myfantasyleague\.com\/\d{4}\/.{4}\/\d{5}$/i;
 
             refresh();
+            $scope.loadingLeague = false;
             $scope.leagueInfo = LeagueInfo;
             $scope.refresh = refresh;
             $scope.changeLeagueYear = changeLeagueYear;
@@ -20,6 +21,7 @@ angular.module('all').controller('MainCtrl',
                 leagueId = leagueId || LeagueInfo.id();
                 year = year || LeagueInfo.year();
 
+                $scope.loadingLeague = true;
                 var standingsPromise = MflService.leagueStandings(leagueId, year);
                 var leaguePromise = MflService.league(leagueId, year);
 
@@ -52,6 +54,9 @@ angular.module('all').controller('MainCtrl',
                         if($scope.history) {
                             $scope.currentHistory = _.find($scope.history, {id: LeagueInfo.id()});
                         }
+                    })
+                    .finally(function() {
+                        $scope.loadingLeague = false;
                     });
             }
         }

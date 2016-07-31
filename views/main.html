@@ -1,19 +1,26 @@
 <div class="container-fluid">
-    <h3>
-        League Id: <input class="form-control" type="number" ng-model="leagueInfo.id" ng-model-options="{getterSetter: true}">
-    </h3>
-    <h3>
-        Year: <input class="form-control" type="number" ng-model="leagueInfo.year" ng-model-options="{getterSetter: true}">
-    </h3>
-    <button type="button" class="btn btn-primary" ng-click="refresh()">Refresh</button>
+    <form ng-submit="refresh()" class="row">
+        <h3 class="col-md-6">
+            League Id: <input class="form-control" type="number" ng-model="leagueInfo.id" ng-model-options="{getterSetter: true}">
+        </h3>
+        <h3 class="col-md-6">
+            Year: <input class="form-control" type="number" ng-model="leagueInfo.year" ng-model-options="{getterSetter: true}">
+        </h3>
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-block btn-primary">Refresh</button>
+        </div>
+    </form>
 
     <br>
     <br>
-    <h3 ng-show="league">
+    <div class="text-center" ng-show="loadingLeague">
+        <i class="fa fa-spinner fa-5x fa-spin"></i>
+    </div>
+    <h3 ng-show="league && !loadingLeague">
         {{league.name}} ({{league.id}})<br>
         <select ng-options="item.year for item in history" ng-model="currentHistory" ng-change="changeLeagueYear()"></select>
     </h3>
-    <table class="table table-striped" ng-show="standings">
+    <table class="table table-striped" ng-show="standings && !loadingLeague">
         <thead>
             <tr>
                 <th>Rank</th>

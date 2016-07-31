@@ -1,3 +1,7 @@
 .table tbody>tr>td.vert-align{
     vertical-align: middle;
 }
+
+.fa-spinner {
+    color: #337ab7;
+}
