@@ -12,12 +12,18 @@ angular.module('all').factory('MflService',
             }
 
             var service = _.mapValues(leagueApis, function(callback, api) {
-                return function() {
-                    return MflRest.get().one('').get({
-                        L: LeagueInfo.id(),
+                return function(leagueId, leagueYear) {
+                    var id = leagueId || LeagueInfo.id();
+                    var year = leagueYear || LeagueInfo.year();
+                    return MflRest.get(year).one('').get({
+                        L: id,
                         JSON: 1,
                         TYPE: api
                     }).then(function(data) {
+                        if(!data || !data[api]) {
+                            throw new Error(api + ' could not be found for League Id: '+ id + ' and Year: ' + year);
+                        }
+
                         return callback(data[api]);
                     });
                 };

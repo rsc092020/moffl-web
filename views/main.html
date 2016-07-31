@@ -11,7 +11,7 @@
     <br>
     <h3 ng-show="league">
         {{league.name}} ({{league.id}})<br>
-        <select ng-options="item.year for item in history" ng-model="historyItem" ng-change="changeLeagueYear()"></select>
+        <select ng-options="item.year for item in history" ng-model="currentHistory" ng-change="changeLeagueYear()"></select>
     </h3>
     <table class="table table-striped" ng-show="standings">
         <thead>

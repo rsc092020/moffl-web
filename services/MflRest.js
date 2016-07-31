@@ -1,23 +1,21 @@
 angular.module('all').factory('MflRest',
     ['Restangular', 'LeagueInfo',
         function(Restangular, LeagueInfo) {
-
             'use strict';
 
-            function get() {
+            return {
+                get: get
+            };
+
+            function get(leagueYear) {
                 var mflRestangular = Restangular.withConfig(function(RestangularConfigurer) {
-                    var url = LeagueInfo.baseUrl() + '/' + LeagueInfo.year() +'/export';
+                    var url = LeagueInfo.baseUrl() + '/' + (leagueYear || LeagueInfo.year()) +'/export';
 
                     RestangularConfigurer.setBaseUrl(url);
                 });
 
                 return mflRestangular;
             }
-
-
-            return {
-                get: get
-            };
         }
     ]
 );
