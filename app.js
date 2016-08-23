@@ -21,8 +21,8 @@ angular.module('all').run(['LeagueInfo',
         //current year:
         //LeagueInfo.year(new Date().getFullYear());
 
-        LeagueInfo.year(2015);
-        LeagueInfo.id(35465);
+        LeagueInfo.year(2016);
+        LeagueInfo.id(48649);
         LeagueInfo.baseUrl('http://www03.myfantasyleague.com');
     }
 ]);

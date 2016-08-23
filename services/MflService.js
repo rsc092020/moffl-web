@@ -3,12 +3,38 @@ angular.module('all').factory('MflService',
         function (MflRest, LeagueInfo) {
             'use strict';
 
+            var convertToFloat = _.rest(function(obj, props) {
+                _.forEach(props, function(prop) {
+                    obj[prop] = parseFloat(obj[prop]);
+                });
+            });
 
             var leagueApis = {
                 leagueStandings: function(data) {
-                    return data.franchise;
+                    return _.map(data.franchise, function(team) {
+                        convertToFloat(team,
+                            'all_play_l', 'all_play_t',
+                            'all_play_w', 'altpwr',
+                            'bbidspent', 'dp',
+                            'h2hl', 'h2ht',
+                            'h2hw', 'maxpa',
+                            'minpa', 'op',
+                            'pa', 'pf',
+                            'power_rank', 'pp',
+                            'pwr', 'streak_len',
+                            'vp');
+
+                        return team;
+                    });
                 },
-                league: _.identity
+                league: function(data) {
+                    _.forEach(data.franchises.franchise, function(team) {
+                        convertToFloat(team,
+                            'auctionStartAmount', 'bbidAvailableBalance',
+                            'waiverSortOrder');
+                    });
+                    return data;
+                }
             }
 
             var service = _.mapValues(leagueApis, function(callback, api) {
