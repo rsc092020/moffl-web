@@ -5,7 +5,7 @@ angular.module('all').factory('MflService',
 
             var convertToFloat = _.rest(function(obj, props) {
                 _.forEach(props, function(prop) {
-                    obj[prop] = parseFloat(obj[prop]);
+                    obj[prop] = parseFloat(obj[prop]) || 0;
                 });
             });
 
