@@ -1,1 +1,26 @@
-Hello World
+<!DOCTYPE html>
+<html lang="en" ng-app="all">
+<head>
+    <meta charset="utf-8" http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.13.1/lodash.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/restangular/1.5.2/restangular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.min.js"></script>
+
+    <script src="app.js"></script>
+    <script src="controllers/MainCtrl.js"></script>
+    <script src="controllers/DetailCtrl.js"></script>
+    <script src="services/LeagueInfo.js"></script>
+    <script src="services/MflRest.js"></script>
+    <script src="services/MflService.js"></script>
+</head>
+<body>
+<div id="main-content" ui-view>
+</div>
+</body>
+</html>

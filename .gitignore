@@ -1,1 +1,5 @@
-node_modules
+.DS_STORE
+.idea/
+!.idea/codeStyleSettings.xml
+npm-debug.log
+node_modules/

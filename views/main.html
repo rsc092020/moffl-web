@@ -1,0 +1,30 @@
+<div class="container-fluid">
+    <h3>League Id: <input type="number" ng-model="leagueInfo.id" ng-model-options="{getterSetter: true}"></h3>
+    <h3>Year: <input type="number" ng-model="leagueInfo.year" ng-model-options="{getterSetter: true}"></h3>
+    <button type="button" class="btn btn-primary" ng-click="refresh()">Refresh</button>
+
+    <table class="table table-striped" ng-show="standings">
+        <thead>
+            <tr>
+                <th>Wins</th>
+                <th>Losses</th>
+                <th>Ties</th>
+                <th>Victory Points</th>
+                <th>PF</th>
+                <th>PA</th>
+                <th>Power Rank</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="team in standings">
+                <td>{{team.h2hw}}</td>
+                <td>{{team.h2hl}}</td>
+                <td>{{team.h2ht}}</td>
+                <td>{{team.vp}}</td>
+                <td>{{team.pf}}</td>
+                <td>{{team.pa}}</td>
+                <td>{{team.pwr}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
