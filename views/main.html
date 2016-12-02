@@ -3,9 +3,16 @@
     <h3>Year: <input type="number" ng-model="leagueInfo.year" ng-model-options="{getterSetter: true}"></h3>
     <button type="button" class="btn btn-primary" ng-click="refresh()">Refresh</button>
 
+    <br>
+    <br>
+    <h3 ng-show="league">
+        {{league.name}} ({{league.id}})<br>{{league.year}}
+    </h3>
     <table class="table table-striped" ng-show="standings">
         <thead>
             <tr>
+                <th>Rank</th>
+                <th>Team</th>
                 <th>Wins</th>
                 <th>Losses</th>
                 <th>Ties</th>
@@ -16,14 +23,16 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="team in standings">
-                <td>{{team.h2hw}}</td>
-                <td>{{team.h2hl}}</td>
-                <td>{{team.h2ht}}</td>
-                <td>{{team.vp}}</td>
-                <td>{{team.pf}}</td>
-                <td>{{team.pa}}</td>
-                <td>{{team.pwr}}</td>
+            <tr ng-repeat="team in standings | orderBy:'-vp'">
+                <td class="vert-align">{{::$index + 1}}</td>
+                <td class="vert-align"><img ng-src="{{::team.icon}}" height="40" width="40">&nbsp;&nbsp;{{::team.name}}</td>
+                <td class="vert-align">{{::team.h2hw}}</td>
+                <td class="vert-align">{{::team.h2hl}}</td>
+                <td class="vert-align">{{::team.h2ht}}</td>
+                <td class="vert-align">{{::team.vp}}</td>
+                <td class="vert-align">{{::team.pf}}</td>
+                <td class="vert-align">{{::team.pa}}</td>
+                <td class="vert-align">{{::team.pwr}}</td>
             </tr>
         </tbody>
     </table>

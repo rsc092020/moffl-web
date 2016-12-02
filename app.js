@@ -12,19 +12,17 @@ angular.module('all').config(['$urlRouterProvider', '$stateProvider',
                 url: '/main',
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
-            })
-            .state('detail', {
-                url: '/detail',
-                templateUrl: 'views/detail.html',
-                controller: 'DetailCtrl'
             });
     }
 ]);
 
 angular.module('all').run(['LeagueInfo',
     function(LeagueInfo) {
-        //default to current year
-        LeagueInfo.year(new Date().getFullYear());
+        //current year:
+        //LeagueInfo.year(new Date().getFullYear());
+
+        LeagueInfo.year(2015);
         LeagueInfo.id(35465);
+        LeagueInfo.baseUrl('http://www03.myfantasyleague.com');
     }
 ]);

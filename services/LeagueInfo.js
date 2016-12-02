@@ -14,7 +14,7 @@ angular.module('all').factory('LeagueInfo',
                 return val ? leagueInfoCache.put(key, val) : leagueInfoCache.get(key);
             }
 
-            var keys = ['id', 'year'];
+            var keys = ['id', 'year', 'baseUrl'];
 
             var service = _(keys)
                 .keyBy()

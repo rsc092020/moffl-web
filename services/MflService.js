@@ -9,21 +9,24 @@ angular.module('all').factory('MflService',
                     JSON: 1,
                     TYPE: 'leagueStandings'
                 }).then(function(data) {
-                    return data.leagueStandings.franchise;
+                    return data && data.leagueStandings && data.leagueStandings.franchise;
                 });
             }
 
-            function getPlayers() {
+            function getLeague() {
                 return MflRest.get().one('').get({
+                    L: LeagueInfo.id(),
                     JSON: 1,
-                    TYPE: 'players'
-                });
+                    TYPE: 'league'
+                }).then(function(data) {
+                    return data && data.league;
+                });;
             }
 
 
             return {
                 getStandings: getStandings,
-                getPlayers: getPlayers
+                getLeague: getLeague
             };
         }
     ]
