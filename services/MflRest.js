@@ -9,7 +9,19 @@ angular.module('all').factory('MflRest',
 
             function get(leagueYear) {
                 var mflRestangular = Restangular.withConfig(function(RestangularConfigurer) {
-                    var url = LeagueInfo.baseUrl() + '/' + (leagueYear || LeagueInfo.year()) +'/export';
+                    // allow urls with multiple // back to back for proxy url to look right
+                    RestangularConfigurer.urlCreatorFactory.path.prototype.normalizeUrl = function (url){
+                        var parts = /((?:http[s]?:)?\/\/)?(.*)?/.exec(url);
+                        return (typeof parts[1] !== 'undefined')? parts[1] + parts[2] : parts[2];
+                    };
+
+                    // cors-anywhere.herokuapp.com
+                    // http://cors-proxy.htmldriven.com/?url=
+                    // https://crossorigin.me/
+                    var proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+                    var mflUrl = LeagueInfo.baseUrl() + '/' + (leagueYear || LeagueInfo.year()) +'/export';
+
+                    var url = proxyUrl + mflUrl;
 
                     RestangularConfigurer.setBaseUrl(url);
                 });
